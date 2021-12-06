@@ -1,0 +1,54 @@
+---
+title: "Visualizing data with ggplot2"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load R Studio Packages and Datasets
+
+This code was taken from an [example](www.kaggle.com/rtatman/visualizing-data-with-ggplot2#Table-of-Contents) by Rachael Tatman in Kaggle.
+ ^[TATMAN, RACHAEL. “Visualizing Data with GGPLOT2.” Kaggle, Kaggle, 9 Jan. 2018, www.kaggle.com/rtatman/visualizing-data-with-ggplot2#Table-of-Contents. ]
+ 
+ 
+
+```{r cars}
+# read in our libraries
+library(tidyverse) # includes ggplot2
+library(ggthemes) # includes pre-made themes we'll use near the end
+library(readr)
+
+# read in our data
+candyRankings <- read_csv("candy-data.csv")
+candyProduction <- read_csv("candy_production.csv")
+
+```
+
+## Plot Data
+
+```{r pressure, echo=FALSE}
+# first we need to set up our plot
+ggplot(data = candyRankings, aes(x = sugarpercent, 
+                                 y = pricepercent, 
+                                 label = competitorname
+                                )) +
+    geom_smooth(method = "lm") + # and then add a fitted line
+    geom_text(check_overlap = T,# automatically reduce overlap (deletes some labels)
+              angle = 30,# tilt the text 30 degrees
+              size = 2.5 # make the text smaller (to reduce overlap more)
+             ) + # and then add labels to the points
+    labs(title = "More sugary candies are more expensive", # plot title
+         x = "Sugar content (percentile)", # x axis label
+         y = "Price (percentile)" # y axis label
+        )
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+**Citations**
+
+
+
+
